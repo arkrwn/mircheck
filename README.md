@@ -11,21 +11,24 @@ It downloads the `Release` file from each mirror to measure the speed and identi
 
 ## Installation
 
-1. **Clone the repository:**
+1. **Recommended - Using PIP**
+   ```sh
+   pip install mircheck
+   ```
+   
+2. **Clone the repository:**
    ```sh
    git clone https://github.com/arkrwn/mircheck.git
-   cd mircheck
-   ```
-
-2. **Install the required libraries:**
-   ```sh
-   pip install requests
+   cd mircheck/mircheck
+   pip install -r ../requirements.txt
+   chmod +x main.py
    ```
 
 ## Usage
 
 ```sh
-python3 mircheck.py [options] <distribution> <country>
+Install using pip: `mircheck [options] <distribution> <country>`
+Install using git: `./mircheck [options] <distribution> <country>`
 ```
 
 ### Positional Arguments
@@ -45,17 +48,17 @@ python3 mircheck.py [options] <distribution> <country>
 
 1. **Find the fastest mirror for Ubuntu `jammy` in Indonesia and save to the current directory:**
    ```sh
-   python3 mircheck.py jammy id
+   mircheck jammy id
    ```
 
 2. **Find the fastest mirror for Debian `stable` in Germany and include source lines:**
    ```sh
-   python3 mircheck.py stable germany -s
+   mircheck stable germany -s
    ```
 
 3. **Find the fastest mirror for Ubuntu `bionic` in the USA and save to a custom path:**
    ```sh
-   python3 mircheck.py bionic us -o /path/to/custom/sources.list
+   mircheck bionic us -o /path/to/custom/sources.list
    ```
 
 ## Output
@@ -72,6 +75,5 @@ Feel free to submit issues and pull requests. For major changes, please open an 
 
 ## Acknowledgements
 
-- The `requests` library for handling HTTP requests.
-- The Ubuntu and Debian communities for providing mirror lists.
+- The Ubuntu for providing mirror lists.
 

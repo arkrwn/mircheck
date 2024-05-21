@@ -8,7 +8,7 @@ setup(
     version="0.1.0",
     author="Arie Kurniawan",
     author_email="hubungi.aja@gmail.com",
-    description="A tool to find the fastest mirror for Ubuntu and it's derivative",
+    description="A tool to find the fastest mirror for Ubuntu and it's derivatives",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/arkrwn/mircheck",
@@ -24,7 +24,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'mircheck=mircheck.main:main',
+            'mircheck=mircheck:main',
         ],
     },
 )
