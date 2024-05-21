@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="mircheck",
-    version="1.1.3",
+    version="1.1.4",
     author="Arie Kurniawan",
     author_email="hubungi.aja@gmail.com",
     description="A tool to find the fastest mirror for Ubuntu and its derivatives",

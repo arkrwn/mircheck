@@ -4,7 +4,6 @@ import argparse
 import requests
 from time import time
 import json
-import os
 import pkg_resources
 
 def fetch_mirrors(country_code):
@@ -14,11 +13,11 @@ def fetch_mirrors(country_code):
         raise Exception(f"Failed to download mirror list. Status code: {response.status_code}")
     return response.text.splitlines()
 
-def test_speed(mirror, distribution):
+def test_speed(mirror, distribution, timeout=10):
     url = f"{mirror}dists/{distribution}/Release"
     try:
         start_time = time()
-        response = requests.get(url, stream=True)
+        response = requests.get(url, stream=True, timeout=timeout)
         response.raise_for_status()
         total_size = int(response.headers.get('content-length', 0))
         if total_size == 0:
@@ -27,15 +26,17 @@ def test_speed(mirror, distribution):
         downloaded_size = 0
         for data in response.iter_content(chunk_size=4096):
             downloaded_size += len(data)
-            if time() - start_time > 0:
-                break
+            if time() - start_time > timeout:
+                raise requests.exceptions.Timeout
         duration = time() - start_time
         speed_bps = downloaded_size / duration
         speed_kbps = speed_bps / 1024
 
         return speed_kbps, None
-    except requests.exceptions.RequestException as e:
+    except requests.exceptions.RequestException:
         return 0, "Mirror Not Live"
+    except requests.exceptions.Timeout:
+        return 0, "Request Timed Out"
 
 def get_country_code(country_name):
     json_path = pkg_resources.resource_filename(__name__, 'country-list.json')
