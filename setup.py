@@ -1,18 +1,21 @@
 from setuptools import setup, find_packages
 
-with open("README.md", "r") as fh:
+with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
     name="mircheck",
-    version="0.1.0",
+    version="1.1.3",
     author="Arie Kurniawan",
     author_email="hubungi.aja@gmail.com",
-    description="A tool to find the fastest mirror for Ubuntu and it's derivatives",
+    description="A tool to find the fastest mirror for Ubuntu and its derivatives",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/arkrwn/mircheck",
     packages=find_packages(),
+    package_data={
+        'mircheck': ['country-list.json'],
+    },
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
@@ -24,7 +27,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'mircheck=mircheck:main',
+            'mircheck=mircheck.mircheck:main',
         ],
     },
 )
